@@ -1,0 +1,3 @@
+Possible analyses
+- Proportion of singletons
+- HWE statistics
