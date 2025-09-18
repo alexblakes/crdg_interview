@@ -16,8 +16,14 @@ echo -e "chrom\tpos\tref\talt\tfilter\tac\tan\taf\tnhomalt\tac_nfe\tan_nfe\taf_n
 
 # Filter gnomAD variants, select a subset of INFO fields, and annotate with 
 # snRNA data from the BED file
-bcftools view -i 'FILTER="PASS" || FILTER="InbreedingCoeff"' -Ou $FILE_IN \
-| tee >(log "BCFtools count, FILTER="PASS" || FILTER="InbreedingCoeff":\n" "$(bcftools +counts -)") \
+bcftools view -Ou $FILE_IN \
+| tee >(log "BCFtools count, input file:\n" "$(bcftools +counts -)") \
+| bcftools view -i 'FILTER="PASS" || FILTER="InbreedingCoeff"' -Ou \
+| tee >(log "BCFtools count, filter PASS or InbreedingCoeff:\n" "$(bcftools +counts -)") \
+| bcftools view -i 'INFO/variant_type="snv"' -Ou \
+| tee >(log "BCFtools count, include SNVs only:\n" "$(bcftools +counts -)") \
+| bcftools view -i 'INFO/n_alt_alleles=1' -Ou \
+| tee >(log "BCFtools count, include n_alt_alleles=1:\n" "$(bcftools +counts -)") \
 | bcftools annotate \
     -x ^INFO/AC,INFO/AN,INFO/AF,INFO/nhomalt,INFO/AC_nfe,INFO/AN_nfe,INFO/AF_nfe,INFO/nhomalt_nfe,INFO/AF_popmax,INFO/allele_type,INFO/cadd_phred,INFO/InbreedingCoeff \
     -Ou \
