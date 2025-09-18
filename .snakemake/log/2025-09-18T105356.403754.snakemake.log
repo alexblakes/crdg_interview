@@ -1,0 +1,53 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: incline31
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job                                        count
+---------------------------------------  -------
+extract_snrna_genes_all                        1
+extract_snrna_genes_make_snrna_bed_file        1
+extract_snrna_genes_merge_bed_intervals        1
+total                                          3
+
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Sep 18 10:53:56 2025]
+localrule extract_snrna_genes_make_snrna_bed_file:
+    input: data/raw/gencode.v48.annotation.gtf.gz, experiments/extract_snrna_genes/make_snrna_bed_file.sh
+    output: data/interim/snrnas.bed
+    jobid: 2
+    reason: Updated input files: experiments/extract_snrna_genes/make_snrna_bed_file.sh
+    resources: tmpdir=/tmp
+Activating conda environment: vep
+[Thu Sep 18 10:54:07 2025]
+Finished jobid: 2 (Rule: extract_snrna_genes_make_snrna_bed_file)
+1 of 3 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Sep 18 10:54:07 2025]
+localrule extract_snrna_genes_merge_bed_intervals:
+    input: data/interim/snrnas.bed, experiments/extract_snrna_genes/merge_snrna_bed_file.sh
+    output: data/interim/snrnas_merged.bed
+    jobid: 1
+    reason: Input files updated by another job: data/interim/snrnas.bed
+    resources: tmpdir=/tmp
+Activating conda environment: vep
+[Thu Sep 18 10:54:07 2025]
+Finished jobid: 1 (Rule: extract_snrna_genes_merge_bed_intervals)
+2 of 3 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Sep 18 10:54:07 2025]
+localrule extract_snrna_genes_all:
+    input: data/interim/snrnas_merged.bed
+    jobid: 0
+    reason: Input files updated by another job: data/interim/snrnas_merged.bed
+    resources: tmpdir=/tmp
+[Thu Sep 18 10:54:07 2025]
+Finished jobid: 0 (Rule: extract_snrna_genes_all)
+3 of 3 steps (100%) done
+Complete log(s): /mnt/bmh01-rds/Ellingford_gene/crdg_interview/.snakemake/log/2025-09-18T105356.403754.snakemake.log

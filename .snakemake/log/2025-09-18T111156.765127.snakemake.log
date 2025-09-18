@@ -1,0 +1,6 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: incline31
+Building DAG of jobs...
+MissingRuleException:
+No rule to produce workflow/tidy_data_for_plots.smk (if you use input functions make sure that they don't raise unexpected exceptions).

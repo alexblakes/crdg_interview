@@ -1,0 +1,9 @@
+Possible analyses
+- Proportion of singletons
+- HWE statistics
+
+##INFO=<ID=lcr,Number=0,Type=Flag,Description="Variant falls within a low complexity region">
+##INFO=<ID=variant_type,Number=1,Type=String,Description="Variant type (snv, indel, multi-snv, multi-indel, or mixed)">
+##INFO=<ID=n_alt_alleles,Number=1,Type=Integer,Description="Total number of alternate alleles observed at variant locus">
+##INFO=<ID=variant_type,Number=1,Type=String,Description="Variant type (snv, indel, multi-snv, multi-indel, or mixed)">
+##INFO=<ID=was_mixed,Number=0,Type=Flag,Description="Variant type was mixed">

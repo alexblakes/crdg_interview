@@ -31,9 +31,8 @@ echo "Writing to $FILE_OUT"
 | cut -f 1,4,5,10,16 \
 | sed 's/\"//g' \
 | awk -v OFS="\t" '$2-=1 {print $1, $2, $3, $4"\,"$5"\,"$3-$2}' \
-| tee >(log 'Number of pseudogenes (HGNC Symbol ends with "P"): ' "$(grep P$ | wc -l)") \
-| tee >(log 'Number of "expressed" snRNA genes (HGNC Symbol does not end with "P"): ' "$(grep -v P$ | wc -l)") \
+| tee >(log 'Number of pseudogenes (HGNC Symbol ends with "P"): ' "$(grep -E P\, | wc -l)") \
+| tee >(log 'Number of "expressed" snRNA genes (HGNC Symbol does not end with "P"): ' "$(grep -E -v P\, | wc -l)") \
 > $FILE_OUT
 
 sleep 0.1 # Print log messages before exit
-
