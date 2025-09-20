@@ -1,6 +1,6 @@
 rule all:
     input:
-        "data/final/gnomad_snrna_variants_hwe_stats.tsv",
+        "data/final/oe_outliers_bonferroni_significant.tsv",
 
 
 rule filter_gnomad_variants:
@@ -29,3 +29,17 @@ rule get_excess_het_stats:
         "crdg_test"
     shell:
         "python3 -m experiments.excess_heterozygosity.get_oe_stats 2&> {log}"
+
+
+rule get_significant_oe_outliers:
+    input:
+        "data/final/gnomad_snrna_variants_hwe_stats.tsv",
+        "experiments/excess_heterozygosity/get_significant_oe_outliers.py",
+    output:
+        "data/final/oe_outliers_bonferroni_significant.tsv",
+    log:
+        "data/logs/experiments.excess_heterozygosity.get_significant_oe_outliers.log",
+    conda:
+        "crdg_test"
+    shell:
+        "python3 -m experiments.excess_heterozygosity.get_significant_oe_outliers 2&> {log}"
