@@ -30,9 +30,11 @@ echo "Writing to $FILE_OUT"
 | tee >(log "Unique snRNA gene IDs: " $(cut -f 10 | sort -u | wc -l)) \
 | cut -f 1,4,5,10,16 \
 | sed 's/\"//g' \
+| tee >(log 'Number of HGNC symbols starting with "ENSG" (dropped)' $(awk '$5 ~ /^ENSG/' | wc -l)) \
+| awk -v OFS="\t" '$5 !~ /^ENSG/' \
+| tee >(log 'Number of pseudogenes (HGNC Symbol ends with "P"): ' "$(awk '$5 ~ /P$/' | wc -l)") \
+| tee >(log 'Number of "expressed" snRNA genes (HGNC Symbol does not end with "P"): ' "$(awk '$5 !~ /P$/' | wc -l)") \
 | awk -v OFS="\t" '$2-=1 {print $1, $2, $3, $4"\,"$5"\,"$3-$2}' \
-| tee >(log 'Number of pseudogenes (HGNC Symbol ends with "P"): ' "$(grep -E P\, | wc -l)") \
-| tee >(log 'Number of "expressed" snRNA genes (HGNC Symbol does not end with "P"): ' "$(grep -E -v P\, | wc -l)") \
 > $FILE_OUT
 
 sleep 0.1 # Print log messages before exit

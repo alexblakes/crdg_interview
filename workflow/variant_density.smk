@@ -1,6 +1,6 @@
 rule all:
     input:
-        "data/final/snrna_variant_counts.tsv",
+        "data/plots/snrna_variant_density.png",
 
 
 rule parse_gnomad_variants:
@@ -20,6 +20,7 @@ rule parse_gnomad_variants:
 rule get_variant_density:
     input:
         "data/interim/gnomad_snrna_variants_tidy_density.tsv",
+        "experiments/variant_density/get_variant_density.py",
     output:
         "data/final/snrna_variant_counts.tsv",
     conda:
@@ -28,3 +29,18 @@ rule get_variant_density:
         "data/logs/experiments.variant_density.get_variant_density.log",
     shell:
         "python3 -m experiments.variant_density.get_variant_density 2&> {log}"
+
+
+rule plot_variant_density:
+    input:
+        "data/final/snrna_variant_counts.tsv",
+        "experiments/variant_density/plot_variant_density.ipynb",
+    output:
+        "data/plots/snrna_variant_density.png",
+        "data/plots/snrna_variant_density.svg",
+    conda:
+        "crdg_test"
+    log:
+        "data/logs/experiments.variant_density.plot_variant_density.log",
+    notebook:
+        "../experiments/variant_density/plot_variant_density.ipynb"

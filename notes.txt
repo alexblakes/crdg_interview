@@ -2,8 +2,14 @@ Possible analyses
 - Proportion of singletons
 - HWE statistics
 
+## Useful gnomAD VCF header lines
 ##INFO=<ID=lcr,Number=0,Type=Flag,Description="Variant falls within a low complexity region">
 ##INFO=<ID=variant_type,Number=1,Type=String,Description="Variant type (snv, indel, multi-snv, multi-indel, or mixed)">
 ##INFO=<ID=n_alt_alleles,Number=1,Type=Integer,Description="Total number of alternate alleles observed at variant locus">
-##INFO=<ID=variant_type,Number=1,Type=String,Description="Variant type (snv, indel, multi-snv, multi-indel, or mixed)">
 ##INFO=<ID=was_mixed,Number=0,Type=Flag,Description="Variant type was mixed">
+
+**NOTE** Three of the "snRNA" gene symbols are ENSG IDs which lack an HGNC symbol.
+These are:
+chr1    146862728       146862845       ENSG00000274450.1,ENSG00000274450,117
+chr1    220825775       220825893       ENSG00000276642.1,ENSG00000276642,118
+chr16   20823442        20823537        ENSG00000275908.1,ENSG00000275908,95

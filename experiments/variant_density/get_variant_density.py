@@ -4,7 +4,7 @@ import pandas as pd
 
 import src
 
-FILE_IN = "data/interim/gnomad_snrna_variants_tidier.tsv"
+FILE_IN = "data/interim/gnomad_snrna_variants_tidy_density.tsv"
 FILE_OUT = "data/final/snrna_variant_counts.tsv"
 
 
@@ -23,6 +23,7 @@ def main():
         .check.head()
         .check.write(FILE_OUT, index=True)
     )
+
 
 if __name__ == "__main__":
     main()
