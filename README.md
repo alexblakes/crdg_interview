@@ -4,7 +4,7 @@ A public repository containing the analysis pipeline for the CRDG postdoc pre-in
 This analysis quantifies differences in variant density and allele frequency between snRNA genes and pseudogenes, and explores the basis for heterozygote excess in certain snRNAs.
 
 ## Analysis pipeline
-This analysis is run as a Snakemake pipeline, driven by `crdg_interview/Snakefile`. The pipeline has a simple linear logic, as defined in the Snakefile. The order in which each analysis step is run is defined in the default target rule, `all`, at the bottom of the Snakefile.
+This analysis is run as a Snakemake pipeline, driven by `crdg_interview/Snakefile`. The pipeline has a simple linear logic, as defined in the Snakefile. The order in which each analysis step is run is defined in the default target rule, `all`, at the bottom of the Snakefile. Running this pipeline will reproduce all the statistics and plots used in the analysis.
 
 ## Directory structure
 The "worker" .smk files used to run each step of the analysis can be found in `crdg_interview/workflow/`.
